@@ -26,8 +26,6 @@ eurecaServer.onConnect (conn) ->
   clients[conn.id] =
     id: conn.id
     remote: remote
-  #here we call setId (defined in the client side)
-  remote.setId conn.id
   return
 #detect client disconnection
 eurecaServer.onDisconnect (conn) ->
@@ -39,6 +37,10 @@ eurecaServer.onDisconnect (conn) ->
     #here we call kill() method defined in the client side
     remote.kill conn.id
   return
+
+
+eurecaServer.exports.holaMundo = ->
+  console.log "Hola Mundo!"
 
 eurecaServer.exports.handshake = ->
   for c of clients
