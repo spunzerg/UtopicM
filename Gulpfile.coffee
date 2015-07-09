@@ -57,4 +57,7 @@ gulp.task 'watch', ->
   gulp.watch 'src/server.coffee', [
     'compile-server'
   ]
+  gulp.watch 'src/assets/*.json', [
+    'copy-assets'
+  ]
   return

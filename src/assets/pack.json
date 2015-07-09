@@ -13,6 +13,11 @@
             "url": "assets/img/phaser-logo.png"
         },
         {
+          "type": "image",
+          "key": "playerSprite",
+          "url": "assets/img/player.png"
+        },
+        {
             "type": "audio",
             "key": "gameMusic",
             "urls": ["assets/snd/Funk_Game_Loop.mp3", "assets/snd/Funk_Game_Loop.ogg"]
