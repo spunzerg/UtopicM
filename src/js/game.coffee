@@ -6,7 +6,7 @@ class Game extends Phaser.State
     @eurecaServer = null
     @ready = false
 
-  create: ->
+  create: =>
     eurecaClient = new (Eureca.Client)
     eurecaClient.ready (proxy) ->
       @eurecaServer = proxy
