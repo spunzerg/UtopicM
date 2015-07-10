@@ -10,12 +10,6 @@ class Menu extends Phaser.State
     @song = @add.audio 'gameMusic'
     @song.play '', 0, 1, true  # Loop
 
-    eurecaClient = new (Eureca.Client)
-    eurecaClient.ready (proxy) ->
-      eurecaServer = proxy
-      return
-
-
   update: ->
     if @input.activePointer.justPressed()
       @song.stop()

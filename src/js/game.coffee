@@ -1,5 +1,5 @@
 Phaser = require 'Phaser'
-
+eurecaSetup = require './eurecaClientSetup.coffee'
 
 class Game extends Phaser.State
   constructor: ->
@@ -13,6 +13,9 @@ class Game extends Phaser.State
     @rightKey = false
 
   create: =>
+    eurecaSetup.eurecaClientSetup()
+    @eurecaServer = eurecaSetup.eurecaServer
+    @ready = true
     @player = @add.sprite @game.world.centerX, @game.world.centerY, 'playerSprite'
     @player.anchor.setTo 0.5, 0.5
 
@@ -22,13 +25,8 @@ class Game extends Phaser.State
     @leftKey = @game.input.keyboard.addKey(Phaser.Keyboard.LEFT)
     @rightKey = @game.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
 
-    eurecaClient = new (Eureca.Client)
-    eurecaClient.ready (proxy) ->
-      @eurecaServer = proxy
-      @ready = true
-      return
-
   update: ->
+    console.log eurecaSetup.eurecaClientSetup.number
     if @upKey.isDown
       @player.y-=2
     else if @downKey.isDown
