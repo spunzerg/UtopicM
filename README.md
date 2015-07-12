@@ -7,7 +7,7 @@ $ npm install
 
 
 ```sh
-$ npm start
+$ gulp serve
 ```
 
 http://localhost:3000/
