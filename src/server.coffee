@@ -26,6 +26,7 @@ eurecaServer.onConnect (conn) ->
   clients[conn.id] =
     id: conn.id
     remote: remote
+  remote.setId(conn.id)
   return
 #detect client disconnection
 eurecaServer.onDisconnect (conn) ->
