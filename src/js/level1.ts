@@ -7,41 +7,31 @@ module UtopicM {
     updateCount: number;
     player: UtopicM.Player;
     socket;
-
-    preload() {
-
-    }
+    playerList: UtopicM.DummyPlayer[] = [];
 
     create() {
       this.socket = io();
-      this.socket=io();
       var style = { font: "65px Arial", fill: "#ff0000", align: "center" };
       this.textValue = this.game.add.text(0, 0, "0", style);
       this.updateCount = 0;
-      this.player = new Player(this.game, 130, 284);
       //this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'player');
       //this.player.anchor.setTo(0.5, 0.5)
+      this.socket.on('clientValidated', this.addPlayer.bind(this));
+    }
 
-      //Entradas de teclado
-      /*this.upKey = this.game.input.keyboard.addKey(Phaser.Keyboard.UP);
-      this.downKey = this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-      this.leftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-      this.rightKey = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);*/
+    addPlayer(data) {
+      this.player = new Player(this.game, 130, 284, data.id);
+      for (var playerId in data.playerList) {
+        if (playerId != data.id) {
+          var dp = new DummyPlayer(this.game, 130, 284, playerId);
+          this.playerList.push(dp);
+        }
+      }
+
     }
 
     update() {
       this.textValue.text = (this.updateCount++).toString();
-      /*
-      if (this.upKey.isDown) {
-        this.player.y -= 2;
-      } else if (this.downKey.isDown) {
-        this.player.y += 2;
-      }
-      if (this.leftKey.isDown) {
-        this.player.x -= 2;
-      } else if (this.rightKey.isDown) {
-        this.player.x += 2;
-      }*/
     }
 
     render() {
